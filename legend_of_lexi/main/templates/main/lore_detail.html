@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ lore.title }}</title>
+    <style>
+        body {
+            background-image: url('/static/images/minecraft-bg.png');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'IM Fell English SC', serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden; /* Prevent overflow on body */
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            min-height: 100%;  /* Let it expand based on content */
+            position: relative; /* Change to relative for flexibility */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: white;
+            padding-bottom: 50px; /* Provide extra space at the bottom */
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+
+        .banner {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 15%;
+            z-index: 10;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+        }
+
+        .content {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            margin-top: 80px; /* Adjusted to ensure it's not cut off at the top */
+            color: black;
+            max-height: 80vh; /* Limit height of the content box */
+            overflow-y: auto; /* Allow scrolling inside the content box */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+        }
+
+        p {
+            white-space: pre-wrap; /* Preserve line breaks */
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        small {
+            font-size: 12px;
+            color: grey;
+        }
+
+        /* Button styles */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <img src="/static/images/legend-of-lexi-banner.png" alt="The Legend of Lexi">
+    </div>
+
+    <div class="overlay">
+        <div class="content">
+            <h1>{{ lore.title }}</h1>
+            <p>{{ lore.content|linebreaks }}</p>
+            <small>Happened on {{ lore.date }}</small>
+
+            <!-- Back to Lore List Button -->
+            <a href="{% url 'lore_list' %}" class="button">Back to Lore List</a>
+        </div>
+    </div>
+</body>
+</html>

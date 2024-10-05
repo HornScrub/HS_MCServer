@@ -1,0 +1,16 @@
+<!-- main/templates/main/reply_to_post.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reply to Post</title>
+</head>
+<body>
+    <h1>Reply to: {{ post.title }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Reply</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<h1>Register</h1>
+<form method="POST" action="{% url 'register' %}">  <!-- Explicit form action -->
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- This renders the form fields -->
+    <button type="submit">Register</button>
+</form>
