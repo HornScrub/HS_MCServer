@@ -3,7 +3,7 @@ from .models import Lore
 from .forms import UserRegistrationForm
 from .models import Profile
 from django.contrib.auth import login, authenticate
-from .forms import FeedbackForm
+from .forms import FeedbackForm, ProfileUpdateForm
 from .models import Feedback
 from django.contrib.auth.decorators import login_required
 from .models import Category, Post, Reply
@@ -152,4 +152,24 @@ def reply_to_post(request, post_id):
         form = ReplyForm()
     return render(request, 'main/reply_to_post.html', {'form': form, 'post': post})
 
+@login_required
+def update_profile(request):
+
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileUpdateForm(instance=profile)
+    return render(request, 'main/update_profile.html', {'form': form})
+
+@login_required
+def profile(request):
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        profile = Profile.objects.create(user=request.user)
+    return render(request, 'main/profile.html', {'profile': profile})
 

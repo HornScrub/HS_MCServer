@@ -1,112 +1,20 @@
 <!-- main/templates/main/hub.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Legend of Lexi - Hub</title>
+{% extends 'main/base.html' %}
 
-    <style>
-        body {
-            background-image: url('/static/images/minecraft-bg.png');
-            background-size: cover;
-            background-position: center 30%;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
+{% block title %}The Legend of Lexi - Hub{% endblock %}
 
-        .overlay {
-            background-color: rgba(0, 0, 0, 0.5);
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
+{% block content %}
+    <div class="hub-container">
+        <h1>Welcome, {{ request.user.username }}!</h1>
+        <a href="{% url 'forum_categories' %}">Forums</a>
+        <a href="{% url 'lore_list' %}">Lore</a>
+        <a href="{% url 'submit_feedback' %}">Feedback</a>
 
-        .banner img {
-            position: relative;
-            width: 40%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .content {
-            font-size: 24px;
-            text-align: center;
-        }
-
-        .hub-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            color: black;
-            text-align: center;
-            width: 50%;
-        }
-
-        .hub-container h1 {
-            margin-bottom: 20px;
-        }
-
-        .hub-container a {
-            display: block;
-            margin: 10px;
-            padding: 10px;
-            background-color: #000000;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .hub-container a:hover {
-            background-color: #363636;
-        }
-
-        .hub-container form {
-            margin-top: 20px;
-        }
-
-        .hub-container button {
-            padding: 10px 20px;
-            background-color: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .hub-container button:hover {
-            background-color: #333;
-        }
-    </style>
-</head>
-<body>
-    <div class="overlay">
-        <div class="banner">
-            <img src="/static/images/legend-of-lexi-banner.png" alt="The Legend of Lexi">
-        </div>
-        <div class="content">
-            <p>Welcome, {{ request.user.username }}!</p>
-        </div>
-
-        <div class="hub-container">
-            <a href="{% url 'forum_categories' %}">Forums</a>
-            <a href="{% url 'lore_list' %}">Lore</a>
-            <a href="{% url 'submit_feedback' %}">Feedback</a>
-
-            <!-- Logout Form -->
-            <form method="POST" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-        </div>
+        <!-- Logout Form -->
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     </div>
-</body>
-</html>
+{% endblock %}
+

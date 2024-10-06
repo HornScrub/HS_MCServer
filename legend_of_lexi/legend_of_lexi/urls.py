@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from main import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +36,10 @@ urlpatterns = [
     path('forum/category/<int:category_id>/', views.category_posts, name='category_posts'),
     path('forum/post/<int:post_id>/', views.post_detail, name='post_detail'),
     path('forum/category/<int:category_id>/new/', views.create_post, name='create_post'),
-    path('forum/post/<int:post_id>/reply/', views.reply_to_post, name='reply_to_post'),  # Add this for replying
+    path('forum/post/<int:post_id>/reply/', views.reply_to_post, name='reply_to_post'),
+    path('profile/', views.profile, name='profile'),
+    path('profile/update/', views.update_profile, name='update_profile'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -29,4 +29,9 @@ class ReplyForm(forms.ModelForm):
     class Meta:
         model = Reply
         fields =['content']
+    
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'profile_picture']
         

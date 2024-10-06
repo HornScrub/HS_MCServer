@@ -1,0 +1,14 @@
+<h1>User Profile</h1>
+
+<p>Username: {{ profile.user.username }}</p>
+<p>Minecraft Username: {{ profile.minecraft_username }}</p>
+
+{% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+{% else %}
+    <p>No profile picture uploaded.</p>
+{% endif %}
+
+<p>Bio: {{ profile.bio }}</p>
+
+<a href="{% url 'update_profile' %}">Update Profile</a>
